@@ -1,0 +1,13 @@
+steps:
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - build
+      - --tag
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/spark/spark:$COMMIT_SHA
+      - .
+  - name: gcr.io/cloud-builders/docker
+    args:
+      - push
+      - ${_REGION}-docker.pkg.dev/$PROJECT_ID/spark/spark:$COMMIT_SHA
+images:
+  - ${_REGION}-docker.pkg.dev/$PROJECT_ID/spark/spark:$COMMIT_SHA

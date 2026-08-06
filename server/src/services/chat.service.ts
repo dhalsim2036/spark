@@ -1,0 +1,14 @@
+import { randomUUID } from "node:crypto";
+import { LIMITS, type Chat, type ChatRequest, type Message } from "@spark/shared";
+export class ChatService {
+  requests = new Map<string, ChatRequest>(); chats = new Map<string, Chat>(); messages = new Map<string, Message[]>(); blocked = new Set<string>();
+  private key(a:string,b:string) { return [a,b].sort().join(":"); }
+  block(a:string,b:string) { this.blocked.add(this.key(a,b)); for(const [id,r] of this.requests) if((r.fromId===a&&r.toId===b)||(r.fromId===b&&r.toId===a)) this.requests.delete(id); }
+  request(fromId:string,toId:string,message:string) { if(fromId===toId) throw new Error("You cannot message yourself"); if(message.length<1||message.length>LIMITS.initialMessage) throw new Error("Invalid message"); if(this.blocked.has(this.key(fromId,toId))) throw new Error("This person is unavailable"); const prior=[...this.requests.values()].find(r=>r.fromId===fromId&&r.toId===toId); if(prior) throw new Error("Request already sent"); const reciprocal=[...this.requests.values()].find(r=>r.fromId===toId&&r.toId===fromId); if(reciprocal){ this.requests.delete(reciprocal.id); return { mutual:true, chat:this.createChat(fromId,toId) }; } const request={id:randomUUID(),fromId,toId,message,createdAt:new Date().toISOString()}; this.requests.set(request.id,request); return {mutual:false,request}; }
+  accept(toId:string,requestId:string) { const request=this.requests.get(requestId); if(!request||request.toId!==toId) throw new Error("Request unavailable"); this.requests.delete(requestId); return this.createChat(request.fromId,toId); }
+  ignore(toId:string,requestId:string) { const r=this.requests.get(requestId); if(!r||r.toId!==toId) throw new Error("Request unavailable"); this.requests.delete(requestId); }
+  send(chatId:string,senderId:string,text:string) { const chat=this.chats.get(chatId); if(!chat||!chat.participants.includes(senderId)) throw new Error("Unauthorized chat"); if(!text.trim()||text.length>LIMITS.chatMessage) throw new Error("Invalid message"); const message={id:randomUUID(),chatId,senderId,text:text.trim(),createdAt:new Date().toISOString()}; this.messages.get(chatId)!.push(message); return message; }
+  leave(chatId:string,userId:string) { const chat=this.chats.get(chatId); if(!chat||!chat.participants.includes(userId)) throw new Error("Unauthorized chat"); this.chats.delete(chatId); this.messages.delete(chatId); return chat.participants.find(id=>id!==userId)!; }
+  endSession(id:string) { for(const chat of [...this.chats.values()]) if(chat.participants.includes(id)) this.leave(chat.id,id); this.requests.forEach((r,key)=>{if(r.fromId===id||r.toId===id)this.requests.delete(key)}); }
+  private createChat(a:string,b:string) { const chat={id:randomUUID(),participants:[a,b] as [string,string],createdAt:new Date().toISOString()}; this.chats.set(chat.id,chat);this.messages.set(chat.id,[]); return chat; }
+}

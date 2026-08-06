@@ -1,0 +1,8 @@
+{
+  "name": "spark",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "workspaces": ["client", "server", "shared"],
+  "scripts": {"dev": "pnpm --filter @spark/shared build && concurrently \"pnpm --filter @spark/server dev\" \"pnpm --filter @spark/client dev\"", "build": "pnpm --filter @spark/shared build && pnpm --filter @spark/server build && pnpm --filter @spark/client build", "test": "pnpm --filter @spark/server test"},
+  "devDependencies": {"concurrently": "^9.0.1", "prettier": "^3.3.3", "typescript": "^5.6.3"}
+}
