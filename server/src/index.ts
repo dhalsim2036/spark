@@ -15,7 +15,7 @@ import { LocationService } from "./services/location.service.js";
 import { ChatService } from "./services/chat.service.js";
 
 const corsOrigin = CLIENT_ORIGIN ?? true;
-const app=express(); app.use(helmet()); app.use(cors({origin:corsOrigin,methods:["GET","POST"]})); app.use(express.json({limit:"32kb"})); app.get("/health",(_,res)=>res.json({ok:true}));
+const app=express(); app.use(helmet({contentSecurityPolicy:{directives:{defaultSrc:["'self'"],baseUri:["'self'"],fontSrc:["'self'","https://fonts.gstatic.com","data:"],formAction:["'self'"],frameAncestors:["'self'"],imgSrc:["'self'","data:","blob:","https://*.tile.openstreetmap.org"],objectSrc:["'none'"],scriptSrc:["'self'"],styleSrc:["'self'","'unsafe-inline'","https://fonts.googleapis.com"],upgradeInsecureRequests:[]}}})); app.use(cors({origin:corsOrigin,methods:["GET","POST"]})); app.use(express.json({limit:"32kb"})); app.get("/health",(_,res)=>res.json({ok:true}));
 const clientDist=path.resolve(path.dirname(fileURLToPath(import.meta.url)),"../../client/dist");
 if(existsSync(clientDist)){ app.use(express.static(clientDist)); app.get("*",(_,res)=>res.sendFile(path.join(clientDist,"index.html"))); }
 const http=createServer(app); const io=new Server(http,{cors:{origin:corsOrigin,methods:["GET","POST"]}});
