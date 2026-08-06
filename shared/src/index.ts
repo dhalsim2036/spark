@@ -1,5 +1,5 @@
 export const LIMITS = { displayName: 30, initialMessage: 300, chatMessage: 1000, photoBytes: 2_000_000, discoveryMeters: 200, locationUpdateMs: 300_000, sessionTtlMs: 30 * 60 * 1000 } as const;
-export const AVATARS = ["✨", "🐼", "🦊", "🐸", "🌙", "☕", "🪐", "🦋"] as const;
+export const AVATARS = ["🐼", "🦊", "🐸", "🐨", "🐯", "🦁", "🐰", "🐻"] as const;
 export type Gender = "woman" | "man" | "nonbinary" | "self_describe";
 export interface TemporaryProfile { displayName: string; avatar: string; photoUrl?: string; gender?: Gender }
 export interface UserSession { id: string; profile: TemporaryProfile; createdAt: string; lastSeen: string }
