@@ -308,7 +308,8 @@ h2 {
   display: grid;
   grid-template-columns: repeat(4, 52px);
   gap: 8px;
-  justify-content: center;
+  width: 100%;
+  justify-content: start;
 }
 .avatars button {
   display: grid;
