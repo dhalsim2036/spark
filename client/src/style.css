@@ -1,8 +1,8 @@
 :root {
   font-family:
     -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  color: #f9f5ea;
-  background: #090915;
+  color: #fff4f4;
+  background: #120b17;
   font-size: 16px;
 }
 * {
@@ -27,9 +27,9 @@ button {
   border: 0;
   border-radius: 14px;
   padding: 12px 18px;
-  background: linear-gradient(135deg, #ffcb64, #e88b3e);
-  color: #1c1020;
-  box-shadow: 0 8px 22px #f6a94738;
+  background: linear-gradient(135deg, #ffb5a9, #dd6b79 55%, #bc4f81);
+  color: #2b1020;
+  box-shadow: 0 8px 24px #e96f8947;
   font-weight: 700;
   cursor: pointer;
   touch-action: manipulation;
@@ -42,7 +42,7 @@ button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 select:focus-visible {
-  outline: 3px solid #ffe3a3;
+  outline: 3px solid #ffc9d1;
   outline-offset: 2px;
 }
 .app,
@@ -56,8 +56,8 @@ select:focus-visible {
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 78% 18%, #51326f66, transparent 28%),
-    radial-gradient(circle at 20% 82%, #1f6a7060, transparent 32%), #090915;
+    radial-gradient(circle at 78% 18%, #9c426c77, transparent 28%),
+    radial-gradient(circle at 20% 82%, #40245373, transparent 34%), #120b17;
 }
 .app > header {
   position: absolute;
@@ -68,10 +68,10 @@ select:focus-visible {
   justify-content: space-between;
   gap: 10px;
   padding: calc(14px + env(safe-area-inset-top)) 16px 24px;
-  background: linear-gradient(180deg, #090915f5 34%, transparent);
+  background: linear-gradient(180deg, #120b17f5 34%, transparent);
 }
 .brand {
-  color: #ffe3a3;
+  color: #ffd4c4;
   font-size: 20px;
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -81,8 +81,8 @@ select:focus-visible {
   padding: 8px 11px;
   border: 1px solid #ffffff24;
   border-radius: 12px;
-  background: #161325e8;
-  color: #ded7eb;
+  background: #241225e8;
+  color: #f0dce3;
   font-size: 12px;
   line-height: 1.3;
   text-align: right;
@@ -91,18 +91,18 @@ select:focus-visible {
 .map {
   width: 100%;
   height: 100%;
-  filter: saturate(0.5) brightness(0.54) contrast(1.18) hue-rotate(205deg);
+  filter: saturate(0.5) brightness(0.5) contrast(1.15) hue-rotate(285deg);
 }
 .pin {
   display: grid;
   width: 42px;
   height: 42px;
   place-items: center;
-  border: 3px solid #ffe6a2;
+  border: 3px solid #ffd2c3;
   border-radius: 50%;
-  background: #7b4aaa;
-  box-shadow: 0 0 0 5px #e9ab5540, 0 4px 18px #00000088;
-  color: #fff8e7;
+  background: #b34872;
+  box-shadow: 0 0 0 5px #ed9b9a40, 0 4px 18px #00000088;
+  color: #fff5f1;
   font-size: 20px;
 }
 .privacy {
@@ -124,7 +124,7 @@ select:focus-visible {
   position: absolute;
   z-index: 700;
   border: 1px solid #ffffff1c;
-  background: linear-gradient(145deg, #211b32, #12101e);
+  background: linear-gradient(145deg, #35172f, #160d1c);
   box-shadow: 0 -10px 46px #00000075;
 }
 .sheet {
@@ -150,8 +150,8 @@ select:focus-visible {
   height: 64px;
   place-items: center;
   border-radius: 18px;
-  background: radial-gradient(circle at 35% 28%, #fff0bb, #e89a4d 42%, #4d285d 100%);
-  box-shadow: 0 6px 22px #ec9c5055;
+  background: radial-gradient(circle at 35% 28%, #fff5df, #f39a9f 42%, #6e244d 100%);
+  box-shadow: 0 6px 22px #ef829566;
   font-size: 38px;
 }
 .sheet .avatar {
@@ -160,13 +160,13 @@ select:focus-visible {
 .sheet h2,
 .modal h2 {
   margin: 0 0 5px;
-  color: #fff8e9;
+  color: #fff5f1;
   font-size: 22px;
   letter-spacing: -0.03em;
 }
 .sheet p {
   margin: 0 0 15px;
-  color: #c8bfd3;
+  color: #e4c7d2;
   font-size: 14px;
 }
 .sheet textarea {
@@ -176,8 +176,8 @@ select:focus-visible {
   padding: 12px;
   border: 1px solid #ffffff24;
   border-radius: 12px;
-  background: #0e0c17;
-  color: #fff8e9;
+  background: #140b16;
+  color: #fff5f1;
   resize: none;
   font-size: 16px;
   line-height: 1.35;
@@ -196,7 +196,7 @@ select:focus-visible {
   padding: 0;
   border-radius: 50%;
   background: #ffffff16;
-  color: #f9e3b2;
+  color: #ffd3bf;
   font-size: 22px;
 }
 .modal .avatar {
@@ -204,7 +204,7 @@ select:focus-visible {
 }
 .modal blockquote {
   margin: 16px 0 20px;
-  color: #e9e0ef;
+  color: #f1dce5;
   font-size: 16px;
   line-height: 1.45;
 }
@@ -217,7 +217,7 @@ select:focus-visible {
 }
 .quiet {
   background: #ffffff16;
-  color: #f7e7be;
+  color: #ffd8d1;
 }
 .onboard {
   display: flex;
@@ -227,8 +227,8 @@ select:focus-visible {
   padding: calc(28px + env(safe-area-inset-top)) 24px
     calc(26px + env(safe-area-inset-bottom));
   background:
-    radial-gradient(circle at 84% 15%, #5b337a77, transparent 28%),
-    radial-gradient(circle at 13% 84%, #143d5866, transparent 35%), #090915;
+    radial-gradient(circle at 84% 15%, #a641707a, transparent 28%),
+    radial-gradient(circle at 13% 84%, #54294f70, transparent 35%), #120b17;
 }
 .orb {
   display: grid;
@@ -236,14 +236,14 @@ select:focus-visible {
   height: 64px;
   place-items: center;
   border-radius: 18px;
-  background: radial-gradient(circle at 35% 30%, #fff0ae, #f1a047 43%, #713d83 100%);
-  color: #2a1223;
-  box-shadow: 0 0 0 8px #eba14a16, 0 10px 28px #e3914c55;
+  background: radial-gradient(circle at 35% 30%, #fff0da, #f39b9e 43%, #8e315b 100%);
+  color: #3c1027;
+  box-shadow: 0 0 0 8px #ec8a9a19, 0 10px 28px #e26f8a66;
   font-size: 34px;
 }
 .eyebrow {
   margin: 25px 0 4px;
-  color: #f7bd65;
+  color: #f5abb2;
   font-size: 12px;
   font-weight: 800;
   letter-spacing: 0.08em;
@@ -256,7 +256,7 @@ h2 {
 .onboard h1,
 .onboard h2 {
   margin: 0;
-  color: #fff8e9;
+  color: #fff5f1;
   text-shadow: 0 3px 18px #00000070;
 }
 .onboard h1 {
@@ -272,7 +272,7 @@ h2 {
 .tag {
   max-width: 330px;
   margin: 14px 0 30px;
-  color: #cec4d7;
+  color: #e9cfd8;
   font-size: 18px;
   line-height: 1.45;
 }
@@ -283,7 +283,7 @@ h2 {
   display: grid;
   gap: 7px;
   margin-top: 16px;
-  color: #eee6f3;
+  color: #f4dfe5;
   font-size: 14px;
   font-weight: 700;
 }
@@ -294,8 +294,8 @@ h2 {
   padding: 12px;
   border: 1px solid #ffffff24;
   border-radius: 12px;
-  background: #12101e;
-  color: #fff8e9;
+  background: #1b0d1c;
+  color: #fff5f1;
   font-size: 16px;
 }
 .onboard input::placeholder {
@@ -305,9 +305,10 @@ h2 {
   margin-top: 24px;
 }
 .avatars {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 52px);
   gap: 8px;
+  justify-content: center;
 }
 .avatars button {
   display: grid;
@@ -321,13 +322,14 @@ h2 {
   border: 1px solid transparent;
   border-radius: 12px;
   background: #ffffff12;
-  color: #fff8e9;
+  color: #fff5f1;
   font-size: 21px;
+  line-height: 1;
 }
 .avatars .picked {
-  border-color: #ffca68;
-  background: #e89a4d2e;
-  box-shadow: inset 0 0 0 1px #ffca68, 0 0 14px #f6ab4c35;
+  border-color: #ffb7b7;
+  background: #e870892e;
+  box-shadow: inset 0 0 0 1px #ffb7b7, 0 0 16px #f37e963f;
 }
 .fine {
   margin: 18px 0 0;
@@ -349,7 +351,7 @@ h2 {
   width: 100vw;
   height: 100dvh;
   background:
-    radial-gradient(circle at 70% 15%, #44265d55, transparent 30%), #090915;
+    radial-gradient(circle at 70% 15%, #8e315b66, transparent 30%), #120b17;
 }
 .chat header {
   display: flex;
@@ -358,7 +360,7 @@ h2 {
   gap: 8px;
   padding: calc(10px + env(safe-area-inset-top)) 12px 10px;
   border-bottom: 1px solid #ffffff18;
-  background: #12101ef2;
+  background: #1b0d1cf2;
 }
 .chat header div {
   min-width: 0;
@@ -368,7 +370,7 @@ h2 {
   display: block;
   max-width: 140px;
   overflow: hidden;
-  color: #fff8e9;
+  color: #fff5f1;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 14px;
@@ -405,14 +407,15 @@ h2 {
 .mine {
   align-self: flex-end;
   border-bottom-right-radius: 4px;
-  background: #6246c9;
-  color: #fff;
+  background: linear-gradient(135deg, #e46d85, #b64371);
+  color: #fff8f7;
+  box-shadow: 0 4px 16px #dc668044;
 }
 .theirs {
   align-self: flex-start;
   border-bottom-left-radius: 4px;
-  background: #28213a;
-  color: #f5eef8;
+  background: #39203a;
+  color: #f8e8ee;
 }
 .thread i {
   color: #b9aebe;
@@ -423,7 +426,7 @@ h2 {
   gap: 8px;
   padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
   border-top: 1px solid #ffffff18;
-  background: #12101ef2;
+  background: #1b0d1cf2;
 }
 .chat input {
   min-width: 0;
@@ -432,8 +435,8 @@ h2 {
   padding: 10px 12px;
   border: 1px solid #ffffff24;
   border-radius: 12px;
-  background: #0d0b15;
-  color: #fff8e9;
+  background: #150a15;
+  color: #fff5f1;
   font-size: 16px;
 }
 .chat form button {
@@ -450,15 +453,16 @@ h2 {
   align-items: center;
   justify-content: center;
   background:
-    radial-gradient(circle at 50% 38%, #ffd77966, transparent 16%),
-    radial-gradient(circle at 22% 18%, #a94d9b88, transparent 34%),
-    linear-gradient(160deg, #1b1033, #080812 75%);
+    radial-gradient(circle at 50% 38%, #ffd0c77a, transparent 16%),
+    radial-gradient(circle at 22% 18%, #c54c7f88, transparent 34%),
+    radial-gradient(circle at 80% 80%, #6f315f70, transparent 33%),
+    linear-gradient(160deg, #35112c, #100914 75%);
   color: #fff;
   text-align: center;
 }
 .spark span {
   font-size: 68px;
-  filter: drop-shadow(0 0 18px #ffcc68);
+  filter: drop-shadow(0 0 18px #ffaf9e);
 }
 .spark h1 {
   margin: 12px 0 4px;
@@ -467,7 +471,7 @@ h2 {
 }
 .spark p {
   margin: 0;
-  color: #fff0c9;
+  color: #ffd6cd;
   font-size: 17px;
 }
 .toast {
@@ -479,8 +483,8 @@ h2 {
   padding: 11px 14px;
   border-radius: 12px;
   border: 1px solid #ffffff20;
-  background: #211b32f5;
-  color: #fff8e9;
+  background: #31152af5;
+  color: #fff5f1;
   font-size: 13px;
   text-align: left;
 }
