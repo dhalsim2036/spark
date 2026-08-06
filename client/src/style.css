@@ -97,6 +97,7 @@ select:focus-visible {
   display: grid;
   width: 42px;
   height: 42px;
+  overflow: hidden;
   place-items: center;
   border: 3px solid #ffd2c3;
   border-radius: 50%;
@@ -110,6 +111,13 @@ select:focus-visible {
   height: 100%;
   border-radius: inherit;
   object-fit: cover;
+}
+.spark-marker {
+  width: 42px !important;
+  height: 42px !important;
+  margin: 0 !important;
+  border: 0 !important;
+  background: transparent !important;
 }
 .privacy {
   position: absolute;
@@ -313,7 +321,7 @@ h2 {
 .onboard input::placeholder {
   color: #93899e;
 }
-.onboard button:last-of-type {
+.onboard > button:last-of-type {
   margin-top: 24px;
 }
 .photo-input {
@@ -323,13 +331,22 @@ h2 {
   opacity: 0;
   pointer-events: none;
 }
+.photo-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  width: 100%;
+  margin-top: 18px;
+}
 .photo-choice {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
   width: 100%;
-  margin-top: 18px;
+  min-width: 0;
+  padding: 10px 8px;
+  font-size: 14px;
 }
 .photo-choice > span:first-child {
   font-size: 20px;
@@ -584,7 +601,7 @@ h2 {
   .fine {
     margin-top: 10px;
   }
-  .onboard button:last-of-type {
+  .onboard > button:last-of-type {
     margin-top: 12px;
   }
 }

@@ -23,10 +23,10 @@ type Request = ChatRequest & {
 type Active = { chat: Chat; other: { id: string; profile: TemporaryProfile } };
 const pin = (profile: Pick<TemporaryProfile, "avatar" | "photoUrl">) =>
   L.divIcon({
-    className: "",
+    className: "spark-marker",
     html: `<div class="pin">${profile.photoUrl ? `<img src="${profile.photoUrl}" alt="" />` : profile.avatar}</div>`,
-    iconSize: [40, 40],
-    iconAnchor: [20, 20],
+    iconSize: [42, 42],
+    iconAnchor: [21, 21],
   });
 function Centre({ p }: { p: [number, number] }) {
   const m = useMap();
@@ -235,7 +235,8 @@ function App() {
   );
 }
 function Onboard({ step, setStep, profile, setProfile, start, notice }: any) {
-  const photoInput = useRef<HTMLInputElement>(null);
+  const cameraInput = useRef<HTMLInputElement>(null);
+  const libraryInput = useRef<HTMLInputElement>(null);
   const [photoError, setPhotoError] = useState("");
 
   async function choosePhoto(file?: File) {
@@ -298,7 +299,7 @@ function Onboard({ step, setStep, profile, setProfile, start, notice }: any) {
             />
           </label>
           <input
-            ref={photoInput}
+            ref={cameraInput}
             className="photo-input"
             type="file"
             accept="image/jpeg,image/png,image/webp"
@@ -309,18 +310,39 @@ function Onboard({ step, setStep, profile, setProfile, start, notice }: any) {
               event.currentTarget.value = "";
             }}
           />
-          <button
-            type="button"
-            className="photo-choice"
-            onClick={() => photoInput.current?.click()}
-          >
-            {profile.photoUrl ? (
-              <img src={profile.photoUrl} alt="Selected temporary avatar" />
-            ) : (
-              <span aria-hidden="true">✦</span>
-            )}
-            <span>{profile.photoUrl ? "Change temporary photo" : "Take or upload photo"}</span>
-          </button>
+          <input
+            ref={libraryInput}
+            className="photo-input"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            aria-label="Choose a temporary profile photo from your photo library"
+            onChange={(event) => {
+              void choosePhoto(event.target.files?.[0]);
+              event.currentTarget.value = "";
+            }}
+          />
+          <div className="photo-actions">
+            <button
+              type="button"
+              className="photo-choice"
+              onClick={() => cameraInput.current?.click()}
+            >
+              {profile.photoUrl ? (
+                <img src={profile.photoUrl} alt="Selected temporary avatar" />
+              ) : (
+                <span aria-hidden="true">✦</span>
+              )}
+              <span>Take photo</span>
+            </button>
+            <button
+              type="button"
+              className="photo-choice quiet"
+              onClick={() => libraryInput.current?.click()}
+            >
+              <span aria-hidden="true">▣</span>
+              <span>Photo library</span>
+            </button>
+          </div>
           <p className="photo-note">
             Your photo is cropped, stripped of metadata, and removed when this session ends.
           </p>
