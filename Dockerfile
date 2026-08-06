@@ -4,14 +4,13 @@ WORKDIR /app
 RUN corepack enable && corepack prepare pnpm@11.9.0 --activate
 
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-COPY client/package.json client/package.json
-COPY server/package.json server/package.json
-COPY shared/package.json shared/package.json
-RUN pnpm install --frozen-lockfile
-
 COPY client client
 COPY server server
 COPY shared shared
+ARG DATABASE_URL="postgresql://spark:spark_build_only@localhost:5432/spark?schema=public"
+ENV DATABASE_URL=$DATABASE_URL
+RUN pnpm install --frozen-lockfile
+
 RUN pnpm --filter @spark/shared build \
   && pnpm --filter @spark/client build \
   && pnpm --filter @spark/server build \
