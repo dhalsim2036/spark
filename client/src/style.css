@@ -337,6 +337,13 @@ h2 {
   font-size: 12px;
   line-height: 1.5;
 }
+.age-note {
+  margin: 14px 0 0;
+  color: #d9bfc8;
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: center;
+}
 .error {
   margin-top: 14px;
   color: #b63354;
