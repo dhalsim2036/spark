@@ -60,9 +60,6 @@ importers:
 
   server:
     dependencies:
-      '@prisma/client':
-        specifier: ^5.20.0
-        version: 5.22.0(prisma@5.22.0)
       '@spark/shared':
         specifier: workspace:*
         version: link:../shared
@@ -94,9 +91,6 @@ importers:
       '@types/node':
         specifier: ^22.7.5
         version: 22.20.1
-      prisma:
-        specifier: ^5.20.0
-        version: 5.22.0
       tsx:
         specifier: ^4.19.1
         version: 4.23.5

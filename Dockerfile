@@ -7,14 +7,11 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY client client
 COPY server server
 COPY shared shared
-ARG DATABASE_URL="postgresql://spark:spark_build_only@localhost:5432/spark?schema=public"
-ENV DATABASE_URL=$DATABASE_URL
 RUN pnpm install --frozen-lockfile
 
 RUN pnpm --filter @spark/shared build \
   && pnpm --filter @spark/client build \
-  && pnpm --filter @spark/server build \
-  && pnpm --filter @spark/server prisma:generate
+  && pnpm --filter @spark/server build
 
 FROM build AS pruned
 RUN pnpm --filter @spark/server --prod deploy --legacy /app/pruned

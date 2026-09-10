@@ -13,6 +13,7 @@ import { AVATARS, LIMITS, type TemporaryProfile } from "@spark/shared";
 import { CLIENT_ORIGIN, PORT, MESSAGE_LIMIT, REQUEST_LIMIT } from "./config.js";
 import { LocationService } from "./services/location.service.js";
 import { ChatService } from "./services/chat.service.js";
+import { FirestoreService } from "./services/firestore.service.js";
 
 const corsOrigin = CLIENT_ORIGIN ?? true;
 const app = express();
@@ -56,6 +57,7 @@ const io = new Server(http, {
 });
 const locations = new LocationService(),
   chats = new ChatService();
+const firestore = new FirestoreService();
 const profiles = new Map<string, TemporaryProfile>();
 const sockets = new Map<string, string>();
 const profileSchema = z.object({
@@ -99,6 +101,7 @@ io.on("connection", (socket) => {
       sessionId = randomUUID();
       profiles.set(sessionId, profile);
       sockets.set(sessionId, socket.id);
+      void firestore.createSession(sessionId);
       ack?.({
         ok: true,
         session: {
@@ -117,6 +120,7 @@ io.on("connection", (socket) => {
       if (!sessionId) throw new Error("Session required");
       const p = z.object({ lat: z.number(), lng: z.number() }).parse(raw);
       locations.update(sessionId, profiles.get(sessionId)!, p);
+      void firestore.touchSession(sessionId);
       emitNearby();
       ack?.({ ok: true });
     } catch (e) {
@@ -263,15 +267,19 @@ io.on("connection", (socket) => {
         ]),
       })
       .safeParse(raw);
-    if (v.success)
-      console.info("report", {
+    if (v.success) {
+      const report = {
         reporterSessionId: sessionId,
         ...v.data,
         createdAt: new Date().toISOString(),
-      });
+      };
+      console.info("report", report);
+      void firestore.createReport(report);
+    }
   });
   socket.on("disconnect", () => {
     if (!sessionId) return;
+    void firestore.deleteSession(sessionId);
     sockets.delete(sessionId);
     locations.remove(sessionId);
     chats.endSession(sessionId);
